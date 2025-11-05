@@ -63,10 +63,51 @@ public class UsuarioConverter {
 
 
 
-    // Converte uma entidade em DTO
-    public UsuarioDTO paraUsuarioDTO (Usuario usuario){
+
+
+    // Converte a entidade Usuario (vinda do banco de dados) em um DTO.
+    public UsuarioDTO paraUsuarioDTO (Usuario usuarioDTO){
         return UsuarioDTO.builder()
-                .email(usuario.getEmail())
+                .nome(usuarioDTO.getNome())
+                .email(usuarioDTO.getEmail())
+                .senha(usuarioDTO.getSenha())
+                .enderecos(paraListaEnderecoDTO(usuarioDTO.getEnderecos()))
+                .telefones(paraListaTelefoneDTO(usuarioDTO.getTelefones()))
                 .build();
     }
+
+    // Converte uma lista de entidades Endereco em uma lista de DTOs EnderecoDTO.
+    public List<EnderecoDTO> paraListaEnderecoDTO(List<Endereco> enderecoDTO) {
+        return enderecoDTO.stream()
+                .map(this::paraEnderecoDTO) // chama o método abaixo para cada item
+                .toList(); // retorna como lista
+    }
+
+
+    // Converte uma entidade Endereco em um DTO EnderecoDTO.
+    public EnderecoDTO paraEnderecoDTO(Endereco enderecoDTO){
+        return EnderecoDTO.builder()
+                .rua(enderecoDTO.getRua())
+                .numero(enderecoDTO.getNumero())
+                .cidade(enderecoDTO.getCidade())
+                .complemento(enderecoDTO.getComplemento())
+                .cep(enderecoDTO.getCep())
+                .estado(enderecoDTO.getEstado())
+                .build();
+    }
+
+    // Converte uma lista de entidades Telefone em uma lista de DTOs TelefoneDTO.
+    public List<TelefoneDTO> paraListaTelefoneDTO(List<Telefone> telefoneDTOS){
+        return telefoneDTOS.stream().map(this::paraTelefoneDTO).toList();
+    }
+
+    // Converte uma entidade Telefone em um DTO TelefoneDTO.
+    public TelefoneDTO paraTelefoneDTO(Telefone telefoneDTO){
+        return TelefoneDTO.builder()
+                .numero(telefoneDTO.getNumero())
+                .ddd(telefoneDTO.getDdd())
+                .build();
+    }
+
 }
+
