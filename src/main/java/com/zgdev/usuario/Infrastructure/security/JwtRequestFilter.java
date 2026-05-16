@@ -16,11 +16,11 @@ import java.io.IOException;
 public class JwtRequestFilter extends OncePerRequestFilter {
 
     // Define propriedades para armazenar instâncias de JwtUtil e UserDetailsService
-    private final com.zgdev.aprendendo_spring.infrastructure.security.JwtUtil jwtUtil;
+    private final com.zgdev.usuario.Infrastructure.security.JwtUtil jwtUtil;
     private final UserDetailsService userDetailsService;
 
     // Construtor que inicializa as propriedades com instâncias fornecidas
-    public JwtRequestFilter(com.zgdev.aprendendo_spring.infrastructure.security.JwtUtil jwtUtil, UserDetailsService userDetailsService) {
+    public JwtRequestFilter(com.zgdev.usuario.Infrastructure.security.JwtUtil jwtUtil, UserDetailsService userDetailsService) {
         this.jwtUtil = jwtUtil;
         this.userDetailsService = userDetailsService;
     }
