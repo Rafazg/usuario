@@ -6,7 +6,9 @@ import com.zgdev.usuario.Infrastructure.entity.Usuario;
 import com.zgdev.usuario.business.Dto.EnderecoDTO;
 import com.zgdev.usuario.business.Dto.TelefoneDTO;
 import com.zgdev.usuario.business.Dto.UsuarioDTO;
+import com.zgdev.usuario.business.UsuarioService;
 import org.springframework.stereotype.Component;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 
@@ -112,6 +114,17 @@ public class UsuarioConverter {
         return TelefoneDTO.builder()
                 .ddd(telefone.getDdd())
                 .numero(telefone.getNumero())
+                .build();
+    }
+
+    public Usuario updateUsuario(UsuarioDTO usuarioDTO, Usuario usuarioEntity){
+        return Usuario.builder()
+                .nome(usuarioDTO.getNome() != null ? usuarioDTO.getNome() : usuarioEntity.getNome())
+                .id(usuarioEntity.getId())
+                .senha(usuarioDTO.getSenha() != null ? usuarioDTO.getSenha() : usuarioEntity.getSenha())
+                .email(usuarioDTO.getEmail() != null ? usuarioDTO.getEmail() : usuarioEntity.getEmail())
+                .enderecos(usuarioEntity.getEnderecos())
+                .telefones(usuarioEntity.getTelefones())
                 .build();
     }
 }
