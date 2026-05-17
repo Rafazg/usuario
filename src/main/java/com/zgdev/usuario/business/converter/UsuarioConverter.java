@@ -149,4 +149,25 @@ public class UsuarioConverter {
                 .numero(telefoneDTO.getNumero() != null ? telefoneDTO.getNumero() : telefoneEntity.getNumero())
                 .build();
     }
+
+    public Endereco paraEnderecoEntity(EnderecoDTO dto, Long idUsuario){
+        return Endereco.builder()
+                .id(dto.getId())
+                .rua(dto.getRua())
+                .numero(dto.getNumero())
+                .cidade(dto.getCidade())
+                .complemento(dto.getComplemento())
+                .cep(dto.getCep())
+                .estado(dto.getEstado())
+                .usuario_id(idUsuario)
+                .build();
+    }
+
+    public Telefone paraTelefoneEntity(TelefoneDTO dto, Long idUsuario){
+        return Telefone.builder()
+                .ddd(dto.getDdd())
+                .numero(dto.getNumero())
+                .usuario_id(idUsuario)
+                .build();
+    }
 }
